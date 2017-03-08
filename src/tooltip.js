@@ -29,27 +29,7 @@ c3_chart_internal_fn.getTooltipContent = function (d, defaultTitleFormat, defaul
         titleFormat = config.tooltip_format_title || defaultTitleFormat,
         nameFormat = config.tooltip_format_name || function (name) { return name; },
         valueFormat = config.tooltip_format_value || defaultValueFormat,
-        text, i, title, value, name, bgcolor,
-        orderAsc = $$.isOrderAsc();
-
-    if (config.data_groups.length === 0) {
-        d.sort(function(a, b){
-            var v1 = a ? a.value : null, v2 = b ? b.value : null;
-            return orderAsc ? v1 - v2 : v2 - v1;
-        });
-    } else {
-        var ids = $$.orderTargets($$.data.targets).map(function (i) {
-            return i.id;
-        });
-        d.sort(function(a, b) {
-            var v1 = a ? a.value : null, v2 = b ? b.value : null;
-            if (v1 > 0 && v2 > 0) {
-                v1 = a ? ids.indexOf(a.id) : null;
-                v2 = b ? ids.indexOf(b.id) : null;
-            }
-            return orderAsc ? v1 - v2 : v2 - v1;
-        });
-    }
+        text, i, title, value, name, bgcolor;
 
     for (i = 0; i < d.length; i++) {
         if (! (d[i] && (d[i].value || d[i].value === 0))) { continue; }
